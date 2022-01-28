@@ -1,13 +1,15 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
+
+from .models import CustomUser
 
 from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = CustomUser
         fields = (
-            'username',
+            'phone_number',
             'email',
             'first_name',
             'last_name',

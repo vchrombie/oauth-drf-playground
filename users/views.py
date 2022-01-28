@@ -1,6 +1,8 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 
-from oauth_drf_playground.serializer import UserSerializer, GroupSerializer
+from .models import CustomUser
+
+from .serializer import UserSerializer, GroupSerializer
 
 from rest_framework import generics, permissions
 
@@ -8,7 +10,7 @@ from oauth2_provider.contrib.rest_framework import TokenHasScope, TokenHasReadWr
 
 
 class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [
         permissions.IsAuthenticated,
@@ -17,7 +19,7 @@ class UserList(generics.ListCreateAPIView):
 
 
 class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = [
         permissions.IsAuthenticated,

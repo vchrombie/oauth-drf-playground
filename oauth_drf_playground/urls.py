@@ -16,8 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from oauth_drf_playground.views import UserList, UserDetail, GroupList
-
+from users.views import UserList, UserDetail, GroupList
 
 admin.autodiscover()
 
