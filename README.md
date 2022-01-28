@@ -1,5 +1,7 @@
 # oauth-drf-playground
 
+### authentication using `username` and `password`
+
 ```bash
 $ curl -X POST -d "grant_type=password&username=root&password=root" -u"drYC0wA7wRlRcJSqfwTFs1ga8zEdFiE1dZtEct3n:r6XP7gRaNKEbAiZwwv749jYbqL9xXlGPY1V3LBAz8UCt1R6C8MZJAO14Ptadtt4dhJY4Qk0QTfg1t8ShHBF5J9w7t4lw5dhAHGjP0E91z9iq2I2FAMTDJrdi74UvimVt" http://localhost:8000/o/token/
 {"access_token": "p5HITeM6Ulj1snEctUTPQ1fIQZPbZs", "expires_in": 36000, "token_type": "Bearer", "scope": "read write groups", "refresh_token": "2temE1W9PEHeLFh5vRb8IPahSN6xUS"}%
@@ -42,4 +44,29 @@ $ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" http://127.0.0.
 $ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" -X POST -d"username=foo2&password=bar2" http://localhost:8000/users/
 {"detail":"You do not have permission to perform this action."}%
 
+```
+
+### authentication using `phone_number` and `password`
+
+```
+$ curl http://127.0.0.1:8000/users/
+{"detail":"Authentication credentials were not provided."}%
+
+$ curl -X POST -d "grant_type=password&username=918186866445&password=root" -u"WcjI8vEyxd5lys1kMABGKwq2nb0RS9pa0vJ5JMSv:ej5sEvUm56ItCRKJLiEejUzoYFwdVBxnlzc8zH4wddFdmZdsjSFDLnd4zV1p42cHuolv3WUJlVPn7ctrRE1vuF8hDhZKT6CstrUAhn6OC5NqUeWT6Il3RicHKKYSmHQq" http://localhost:8000/o/token/
+{"access_token": "pomHUrUDc7XdKmVxdZOaS9PcsehgIC", "expires_in": 36000, "token_type": "Bearer", "scope": "read write groups", "refresh_token": "iusJoz6ScPMWP4gvyYkfCrzU1eHPMn"}%
+
+$ curl -H "Authorization: Bearer pomHUrUDc7XdKmVxdZOaS9PcsehgIC" http://127.0.0.1:8000/users/
+[{"phone_number":"+918186866445","email":"","first_name":"","last_name":""},{"phone_number":"+919948241405","email":"","first_name":"","last_name":""},{"phone_number":"918186866445","email":"","first_name":"","last_name":""}]%
+
+$ curl -H "Authorization: Bearer pomHUrUDc7XdKmVxdZOaS9PcsehgIC" http://127.0.0.1:8000/users/1/
+{"phone_number":"+918186866445","email":"","first_name":"","last_name":""}%
+
+$ curl -H "Authorization: Bearer pomHUrUDc7XdKmVxdZOaS9PcsehgIC" http://127.0.0.1:8000/groups/
+[{"name":"marvel"},{"name":"dc"}]%
+
+$ curl -H "Authorization: Bearer pomHUrUDc7XdKmVxdZOaS9PcsehgIC" -X POST -d"phone_number=919948241405&password=bar" http://localhost:8000/users/
+{"phone_number":"919948241405","email":"","first_name":"","last_name":""}%
+
+$ curl -H "Authorization: Bearer pomHUrUDc7XdKmVxdZOaS9PcsehgIC" http://127.0.0.1:8000/users/
+[{"phone_number":"+918186866445","email":"","first_name":"","last_name":""},{"phone_number":"+919948241405","email":"","first_name":"","last_name":""},{"phone_number":"918186866445","email":"","first_name":"","last_name":""},{"phone_number":"919948241405","email":"","first_name":"","last_name":""}]%             
 ```
