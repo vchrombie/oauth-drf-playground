@@ -43,12 +43,11 @@ $ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" http://127.0.0.
 
 $ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" -X POST -d"username=foo2&password=bar2" http://localhost:8000/users/
 {"detail":"You do not have permission to perform this action."}%
-
 ```
 
 ### authentication using `phone_number` and `password`
 
-```
+```bash
 $ curl http://127.0.0.1:8000/users/
 {"detail":"Authentication credentials were not provided."}%
 
