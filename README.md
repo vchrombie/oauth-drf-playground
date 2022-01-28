@@ -1,1 +1,45 @@
 # oauth-drf-playground
+
+```bash
+$ curl -X POST -d "grant_type=password&username=root&password=root" -u"drYC0wA7wRlRcJSqfwTFs1ga8zEdFiE1dZtEct3n:r6XP7gRaNKEbAiZwwv749jYbqL9xXlGPY1V3LBAz8UCt1R6C8MZJAO14Ptadtt4dhJY4Qk0QTfg1t8ShHBF5J9w7t4lw5dhAHGjP0E91z9iq2I2FAMTDJrdi74UvimVt" http://localhost:8000/o/token/
+{"access_token": "p5HITeM6Ulj1snEctUTPQ1fIQZPbZs", "expires_in": 36000, "token_type": "Bearer", "scope": "read write groups", "refresh_token": "2temE1W9PEHeLFh5vRb8IPahSN6xUS"}%
+
+$ curl http://127.0.0.1:8000/users/
+{"detail":"Authentication credentials were not provided."}%
+
+$ curl -H "Authorization: Bearer p5HITeM6Ulj1snEctUTPQ1fIQZPbZs" http://127.0.0.1:8000/users/
+[{"username":"root","email":"","first_name":"","last_name":""},{"username":"spiderman","email":"","first_name":"","last_name":""},{"username":"superman","email":"","first_name":"","last_name":""},{"username":"batman","email":"","first_name":"","last_name":""},{"username":"ironman","email":"","first_name":"","last_name":""},{"username":"aquaman","email":"","first_name":"","last_name":""},{"username":"gentleman","email":"","first_name":"","last_name":""}]%
+
+$ curl -H "Authorization: Bearer p5HITeM6Ulj1snEctUTPQ1fIQZPbZs" http://127.0.0.1:8000/users/1/
+{"username":"root","email":"","first_name":"","last_name":""}%
+
+$ curl -H "Authorization: Bearer p5HITeM6Ulj1snEctUTPQ1fIQZPbZs" http://127.0.0.1:8000/groups/
+[{"name":"marvel"},{"name":"dc"}]%
+
+$ curl -H "Authorization: Bearer p5HITeM6Ulj1snEctUTPQ1fIQZPbZs" -X POST -d"username=foo&password=bar" http://localhost:8000/users/
+{"username":"foo","email":"","first_name":"","last_name":""}%
+
+$ curl -H "Authorization: Bearer p5HITeM6Ulj1snEctUTPQ1fIQZPbZs" http://127.0.0.1:8000/users/
+[{"username":"root","email":"","first_name":"","last_name":""},{"username":"spiderman","email":"","first_name":"","last_name":""},{"username":"superman","email":"","first_name":"","last_name":""},{"username":"batman","email":"","first_name":"","last_name":""},{"username":"ironman","email":"","first_name":"","last_name":""},{"username":"aquaman","email":"","first_name":"","last_name":""},{"username":"gentleman","email":"","first_name":"","last_name":""},{"username":"foo","email":"","first_name":"","last_name":""}]%
+```
+
+```bash
+$ curl -X POST -d "grant_type=password&username=root&password=root&scope=read" -u"drYC0wA7wRlRcJSqfwTFs1ga8zEdFiE1dZtEct3n:r6XP7gRaNKEbAiZwwv749jYbqL9xXlGPY1V3LBAz8UCt1R6C8MZJAO14Ptadtt4dhJY4Qk0QTfg1t8ShHBF5J9w7t4lw5dhAHGjP0E91z9iq2I2FAMTDJrdi74UvimVt" http://localhost:8000/o/token/
+{"access_token": "RGQ84qr2btBO6jF2UrBgLO5WHsVR5E", "expires_in": 36000, "token_type": "Bearer", "scope": "read", "refresh_token": "b49H3XGZDQyjnYssHDVHO8QF3GG2YB"}%
+
+$ curl http://127.0.0.1:8000/users/
+{"detail":"Authentication credentials were not provided."}%
+
+$ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" http://127.0.0.1:8000/users/
+[{"username":"root","email":"","first_name":"","last_name":""},{"username":"spiderman","email":"","first_name":"","last_name":""},{"username":"superman","email":"","first_name":"","last_name":""},{"username":"batman","email":"","first_name":"","last_name":""},{"username":"ironman","email":"","first_name":"","last_name":""},{"username":"aquaman","email":"","first_name":"","last_name":""},{"username":"gentleman","email":"","first_name":"","last_name":""},{"username":"foo","email":"","first_name":"","last_name":""}]%
+
+$ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" http://127.0.0.1:8000/users/1/
+{"username":"root","email":"","first_name":"","last_name":""}%
+
+$ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" http://127.0.0.1:8000/groups/
+{"detail":"You do not have permission to perform this action."}%
+
+$ curl -H "Authorization: Bearer RGQ84qr2btBO6jF2UrBgLO5WHsVR5E" -X POST -d"username=foo2&password=bar2" http://localhost:8000/users/
+{"detail":"You do not have permission to perform this action."}%
+
+```
