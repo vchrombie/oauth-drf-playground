@@ -1,4 +1,6 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
+
+from users.models import CustomUser
 
 # Group objects
 
@@ -10,26 +12,18 @@ marvel.save()
 
 # User objects
 
-spiderman = User(username='spiderman', password='spiderman_pwd', email='spiderman@marvel.com', first_name='Spider', last_name='Man')
-spiderman.save()
-spiderman.groups.add(marvel)
+eights = CustomUser(phone_number='+918888888888', password='Eight8s@',
+                    first_name='Eight', last_name='8s@')
+eights.save()
+eights.groups.add(marvel)
 
-ironman = User(username='ironman', password='ironman_pwd', email='ironman@marvel.com', first_name='Iron', last_name='Man')
-ironman.save()
-ironman.groups.add(marvel)
+sevens = CustomUser(phone_number='+917777777777', password='Seven7s@',
+                    first_name='Seven', last_name='7s@')
+sevens.save()
+sevens.groups.add(dc)
 
-batman = User(username='batman', password='batman_pwd', email='batman@dc.com', first_name='Bat', last_name='Man')
-batman.save()
-batman.groups.add(dc)
+threes = CustomUser(phone_number='+913333333333', password='Three3s@',
+                    first_name='Three', last_name='3s@')
 
-superman = User(username='superman', password='superman_pwd', email='superman@dc.com', first_name='Super', last_name='Man')
-superman.save()
-superman.groups.add(dc)
-
-aquaman = User(username='aquaman', password='aquaman_pwd', email='aquaman@dc.com', first_name='Aqua', last_name='Man')
-aquaman.save()
-aquaman.groups.add(dc)
-
-gentleman = User(username='gentleman', password='gentleman_pwd', email='gentleman@gentleman.com', first_name='Gentle', last_name='Man')
-gentleman.save()
-gentleman.groups.add(dc, marvel)
+threes.save()
+threes.groups.add(marvel, dc)
