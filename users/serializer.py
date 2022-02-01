@@ -1,8 +1,8 @@
 from django.contrib.auth.models import Group
 
-from .models import CustomUser
-
 from rest_framework import serializers
+
+from .models import CustomUser
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,9 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = (
             'phone_number',
-            'email',
             'first_name',
             'last_name',
+            'groups',
         )
 
 
