@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'phonenumber_field',
     'users',
+    'cart',
 ]
 
 MIDDLEWARE = [
