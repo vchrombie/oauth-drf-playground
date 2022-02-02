@@ -26,4 +26,5 @@ urlpatterns = [
     path('users/', UserList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),
     path('groups/', GroupList.as_view()),
+    path('cart/', include('cart.urls'))
 ]
