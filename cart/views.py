@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -25,8 +25,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 class CartViewSet(viewsets.ModelViewSet):
 
-    queryset = Cart.objects.all().order_by('id')
     serializer_class = CartSerializer
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    def get_queryset(self):
+        return Cart.objects.all().order_by('-id').filter(user=self.request.user)
 
     @action(
         methods=['GET'],
