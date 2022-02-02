@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -8,8 +8,7 @@ from .models import Category, Product, Cart
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer
 from .helpers import CartHelper
 
-
-User = settings.AUTH_USER_MODEL
+User = get_user_model()
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -33,12 +32,12 @@ class CartViewSet(viewsets.ModelViewSet):
         methods=['GET'],
         detail=False,
         url_name='checkout',
-        url_path='checkout/(?P<userId>[^/.]+)',
+        url_path='checkout/<int"pk>/',
     )
     def checkout(self, request, *args, **kwargs):
 
         try:
-            user = settings.AUTH_USER_MODEL.objects.get(pk=int(kwargs.get('userId')))
+            user = User.objects.get(pk=int(kwargs.get('userId')))
         except Exception as e:
             return Response(status=status.HTTP_404_NOT_FOUND,
                             data={'Error:': str(e)})
