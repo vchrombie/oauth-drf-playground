@@ -1,5 +1,9 @@
 # oauth-drf-playground
 
+Implementation of [django-oauth-toolkit](https://django-oauth-toolkit.readthedocs.io/en/latest/) for authentication in Django REST Framework
+
+---
+
 ### authentication using `username` and `password`
 
 ```bash
@@ -73,6 +77,3 @@ $ curl -H "Authorization: Bearer pomHUrUDc7XdKmVxdZOaS9PcsehgIC" http://127.0.0.
 ### rerieve only specific user items based on authentication
 ![Screenshot from 2022-02-02 16-53-08](https://user-images.githubusercontent.com/25265451/152144945-aefc0f66-b6ab-4480-96a4-929a873b6273.png)
 ![Screenshot from 2022-02-02 16-53-45](https://user-images.githubusercontent.com/25265451/152144951-aa678b6f-e579-4615-9814-1ed272c128a7.png)
-
-
-
